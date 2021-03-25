@@ -2,9 +2,9 @@ package com.spring.codeblog.controller;
 
 import com.spring.codeblog.model.Postagem;
 import com.spring.codeblog.service.CodeblogService;
-import org.dom4j.rule.Mode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -18,10 +18,19 @@ public class CodeblogController {
 
    @RequestMapping(value = "/posts", method = RequestMethod.GET)
     public ModelAndView getPosts(){
-       ModelAndView mv = new ModelAndView("postagens");
+       ModelAndView mv = new ModelAndView("posts");
        List<Postagem> posts = codeblogService.findAll();
-       mv.addObject("postagens", posts);
+       mv.addObject("posts", posts);
        return mv;
    }
+
+   @RequestMapping(value = "/posts/{id}", method = RequestMethod.GET)
+    public ModelAndView getPost(@PathVariable long id){
+        ModelAndView mv = new ModelAndView("postDetails");
+        Postagem post = codeblogService.findById(id);
+        mv.addObject("post", post);
+        return mv;
+    }
+
 
 }
