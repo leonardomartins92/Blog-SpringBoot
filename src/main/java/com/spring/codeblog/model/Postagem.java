@@ -9,6 +9,7 @@ import java.time.LocalDate;
 
 @Entity
 @Data
+
 public class Postagem {
    @Id
    @GeneratedValue(strategy = GenerationType.AUTO) //gera automaticamente o id
